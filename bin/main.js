@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 const fs = require('fs');
 const path = require('path');
 const program = require('commander');
@@ -10,7 +12,7 @@ const packageJSON = require('../package.json');
 const utils = require('./utils');
 const filesMap = require('./filesMap');
 
-const targetFiles = 'docs';
+const targetFiles = 'blogs';
 
 // 写入文件
 const updatePackageJson = (data) => {
@@ -39,7 +41,7 @@ const initDocs = (repository) => {
     const cloneResult = shell.exec(`git clone "${repository}"`);
     shell.exec(`mv ${fileName} ${targetFiles}`);
     filesMap.createFileMaps(); // 创建文件映射
-    updatePackageJson({ ...packageJSON, doc: repository });
+    updatePackageJson({ ...packageJSON, blogs: repository });
     console.log(
       !cloneResult.code
         ? chalk.green('docs文档下载成功！')

@@ -10,7 +10,7 @@ const { ANALYZE } = process.env; // 是否进行打包分析
 
 const baseConfig = require('./webpack.config.base');
 
-const outputPath = path.resolve(__dirname, '../dist');
+const outputPath = path.resolve(__dirname, '../docs');
 
 const webpackConfig = merge(baseConfig, {
   output: {

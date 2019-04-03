@@ -1,7 +1,8 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const path = require('path');
 
-const defaultRootPath = path.resolve(__dirname, '../docs'); // 当前文件夹目录
+const defaultRootPath = path.resolve(__dirname, '../blogs'); // 当前文件夹目录
 const defaultTargetPath = path.resolve(__dirname, '../site/configs');
 
 // 需要忽略的文件夹
@@ -16,7 +17,7 @@ const ignoreFiles = [
 const targetFilesReg = /\.(md)?$/; // 目标文件
 
 // 获取文件结构
-const readFilePath = (filePath, parentPath = '/docs') => {
+const readFilePath = (filePath, parentPath = '/blogs') => {
   const files = fs.readdirSync(filePath); // 同步读取文件列表
   const fileMap = [];
   files.forEach((fileName) => {

@@ -71,8 +71,8 @@ const webpackConfig = {
   plugins: [
     new CopyWebpackPlugin(
       [
-        { from: 'docs/**/*.md' },
-        { from: 'docs/**/*.+(png|jpg|jpg)', to: 'images/[name].[ext]' },
+        { from: 'blogs/**/*.md' },
+        { from: 'blogs/**/*.+(png|jpg|jpg)', to: 'images/[name].[ext]' },
         { from: 'config.toml' }
       ],
       {}
