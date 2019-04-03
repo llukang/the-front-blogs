@@ -87,6 +87,8 @@ class HLayout extends React.PureComponent {
       onCollapse: this.handleCollapse
     };
 
+
+    console.log(routes);
     return (
       <DocumentTitle title={documentTitle}>
         <div className={styles.layout}>

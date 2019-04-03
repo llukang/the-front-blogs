@@ -3,12 +3,21 @@ const path = require('path');
 
 const defaultRootPath = path.resolve(__dirname, '../docs'); // 当前文件夹目录
 const defaultTargetPath = path.resolve(__dirname, '../site/configs');
-const ignoreFiles = ['node_modules', 'dist', '.git', 'README.md', 'TODO.md']; // 需要忽略的文件夹
+
+// 需要忽略的文件夹
+const ignoreFiles = [
+  'node_modules',
+  'dist',
+  '.git',
+  'README.md',
+  'TODO.md',
+  'CHANGELOG.md'
+];
 const targetFilesReg = /\.(md)?$/; // 目标文件
 
 // 获取文件结构
 const readFilePath = (filePath, parentPath = '/docs') => {
-  const files = fs.readJsonSync(filePath); // 同步读取文件列表
+  const files = fs.readdirSync(filePath); // 同步读取文件列表
   const fileMap = [];
   files.forEach((fileName) => {
     const stats = fs.statSync(`${filePath}/${fileName}`);
@@ -27,6 +36,7 @@ const readFilePath = (filePath, parentPath = '/docs') => {
       });
     }
   });
+
   return fileMap;
 };
 

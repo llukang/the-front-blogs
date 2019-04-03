@@ -87,6 +87,15 @@ program
 
 // 更新项目文档
 program
+  .command('update')
+  .description('更新文件映射')
+  .action(() => {
+    filesMap.createFileMaps();
+    console.log(chalk.green('项目文件映射已更新'));
+  });
+
+// 更新项目映射
+program
   .command('fetch')
   .description('更新项目docs文档')
   .action(() => {
