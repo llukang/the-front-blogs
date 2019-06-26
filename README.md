@@ -30,7 +30,6 @@
 
 ### 反馈与建议
 
-- 开源中国：[@刘录康](http://git.oschina.net/liulukang)
 - 邮箱：<lukang.lu@gmail.com>
 
 ## 感谢阅读这份帮助文档。

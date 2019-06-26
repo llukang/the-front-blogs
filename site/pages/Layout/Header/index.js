@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import { Icon } from 'antd';
 
 import Menu from './Menu';
@@ -12,15 +11,12 @@ class Header extends PureComponent {
   }
 
   render() {
-    const { routes, resumeRoute = {}, sysName, breadcrumbs, isMobile, collapsed, onCollapse } = this.props;
-    const resumePath = resumeRoute.childrens[0].key;
+    const { routes, sysName, breadcrumbs, isMobile, collapsed, onCollapse } = this.props;
 
     return isMobile
       ? (
         <div className={styles.header}>
-          <Link to={resumePath}>
-            <div className="logoIcon"><span>录康</span></div>
-          </Link>
+          <div className="logoIcon"><span>录康</span></div>
           <div className="navContianer">
             <Icon
               type={!collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -31,9 +27,7 @@ class Header extends PureComponent {
       )
       : (
         <div className={styles.header}>
-          <Link to={resumePath}>
-            <div className="logo"><span>{sysName}</span></div>
-          </Link>
+          <div className="logo"><span>{sysName}</span></div>
           <div className="navContianer">
             <Menu
               routes={routes}

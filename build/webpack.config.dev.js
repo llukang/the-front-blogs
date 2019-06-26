@@ -33,13 +33,16 @@ const webpackConfig = merge(baseConfig, {
     // 关闭输出信息
     // quiet: true,
     // 每次构建时候自动打开浏览器并访问网址
-    // open: true,
+    open: true,
     // 开启热更新
     stats: 'errors-only',
     hot: true,
     // 设置端口号
     port: PORT,
     historyApiFallback: true,
+    after() {
+      console.log(`服务地址:http://localhost:${PORT}`);
+    },
   }
 });
 

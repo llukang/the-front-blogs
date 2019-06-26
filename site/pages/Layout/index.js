@@ -21,11 +21,6 @@ const menuRoutes = routes.filter(({ name }) => {
   return !excludeRoute.includes(name);
 });
 
-// 简历router
-const resumeRoute = routes.find(({ name }) => {
-  return name === '个人简历';
-});
-
 class HLayout extends React.PureComponent {
   handleResize = throttle(() => {
     this.setState({ isMobile: window.innerWidth <= mobileWidth });
@@ -73,7 +68,6 @@ class HLayout extends React.PureComponent {
       isMobile,
       collapsed,
       routes: menuRoutes,
-      resumeRoute,
       breadcrumbs,
       onCollapse: this.handleCollapse
     };

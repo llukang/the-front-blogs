@@ -79,5 +79,5 @@
     "webpack-dev-server": "^3.1.5",
     "webpack-merge": "^4.1.4"
   },
-  "blogs": "git@github.com:oh-oh-oh/learn-and-progress.git"
+  "blogs": "git@github.com:llukang/the-front-notes.git"
 }
