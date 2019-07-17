@@ -14,7 +14,12 @@ export const isUrl = (path) => {
 // 请求
 export const request = (mdPath) => {
   return fetch(`${window.location.origin}${mdPath}`)
-    .then(res => res.text());
+    .then((res) => {
+      if (res.ok) {
+        return res.text();
+      }
+      throw new Error('文档不存在');
+    });
 };
 
 // 移除文件后缀名

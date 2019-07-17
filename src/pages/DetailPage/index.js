@@ -21,10 +21,16 @@ class Comp extends React.Component {
   }
 
   async getDoc() {
-    const { mdPath } = this.props;
-    this.setState({ spinning: true });
-    const markdown = await request(mdPath);
-    this.setState({ markdown, spinning: false });
+    try {
+      const { mdPath } = this.props;
+      this.setState({ spinning: true });
+      const markdown = await request(mdPath);
+      this.setState({ markdown });
+    } catch (error) {
+      this.setState({ markdown: '文档遗失……' });
+    } finally {
+      this.setState({ spinning: false });
+    }
   }
 
   render() {
