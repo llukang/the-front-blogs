@@ -1,18 +1,15 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-console */
-
-const fs = require('fs');
 const path = require('path');
 const program = require('commander');
 const shell = require('shelljs');
 const chalk = require('chalk');
+const fs = require('fs-extra');
 const packageJSON = require('../package.json');
 
-const utils = require('./utils');
-const filesMap = require('./filesMap');
+const filesMap = require('./utils/filesMap');
 
-const targetFiles = 'blogs';
+const blogName = 'blogs';
 
 // 写入文件
 const updatePackageJson = (data) => {
@@ -33,42 +30,41 @@ const updatePackageJson = (data) => {
   });
 };
 
-// 初始化文档项目
-const initDocs = (repository) => {
+// init blog
+const fetchBlog = (repository) => {
   try {
-    const fileName = utils.getRepositoryName(repository);
-    shell.exec(`rm -fr ${targetFiles}`);
-    const cloneResult = shell.exec(`git clone "${repository}"`);
-    shell.exec(`mv ${fileName} ${targetFiles}`);
-    filesMap.createFileMaps(); // 创建文件映射
-    updatePackageJson({ ...packageJSON, blogs: repository });
-    console.log(
-      !cloneResult.code
-        ? chalk.green('docs文档下载成功！')
-        : chalk.red('docs文档下载失败！')
-    );
-  } catch (err) {
-    console.log(err);
-    console.log(chalk.red('docs文档下载失败！'));
-  }
-};
+    // save blog's git repository
+    if (repository) {
+      updatePackageJson({ ...packageJSON, [blogName]: repository });
+    } else {
+      repository = packageJSON[blogName];
+    }
+    // check git repository
+    if (!repository) {
+      throw new Error(`${blogName} repository 不存在`);
+    }
 
-// 更新文档项目
-const updateDocs = () => {
-  try {
-    const pullResult = shell.exec(
-      `cd ${targetFiles} &&
-       git checkout ./ &&
-       git pull`
-    );
-    console.log(
-      !pullResult.code
-        ? chalk.green('docs文档更新成功！')
-        : chalk.red('docs文档更新失败！')
-    );
-    filesMap.createFileMaps(); // 创建文件映射
-  } catch (err) {
-    console.log(chalk.red('docs文档更新失败！'));
+    const blogFolderPath = path.resolve(__dirname, `../${blogName}`);
+    const blogExists = fs.existsSync(blogFolderPath);
+
+    if (!blogExists) {
+      const cloneResult = shell.exec(`git clone ${repository}  ${blogName}`);
+      if (cloneResult.code) {
+        throw new Error('初始化blog失败！');
+      }
+    } else {
+      const pullResult = shell.exec(
+        `cd ${blogName} && git checkout ./ && git pull`
+      );
+      if (pullResult.code) {
+        throw new Error('同步blog失败！');
+      }
+    }
+
+    filesMap.createFileMaps(blogName);
+  } catch (error) {
+    console.log(chalk.red(error.message));
+    console.log(error);
   }
 };
 
@@ -79,58 +75,41 @@ program
   .option('-f, --float <n>', 'A float argument', parseFloat)
   .parse(process.argv);
 
-// 初始化项目文档
+// 初始化文档
 program
-  .command('init <repository>')
-  .description('初始化项目docs文档')
+  .command('init [repository]')
+  .description(`初始化${blogName}文档`)
   .action((repository) => {
-    initDocs(repository);
+    fetchBlog(repository);
   });
 
-// 更新项目文档
+// 更新文档
 program
   .command('update')
-  .description('更新文件映射')
+  .description(`更新${blogName}文档`)
   .action(() => {
-    filesMap.createFileMaps();
-    console.log(chalk.green('项目文件映射已更新'));
-  });
-
-// 更新项目映射
-program
-  .command('fetch')
-  .description('更新项目docs文档')
-  .action(() => {
-    // 判断文档仓库是否存在
-    fs.stat(path.resolve(__dirname, '../docs/.git'), (err) => {
-      if (err) {
-        initDocs();
-      } else {
-        updateDocs();
-      }
-    });
+    fetchBlog();
   });
 
 // 运行项目文档
 program
   .command('run <name>')
-  .description('运行docs文档')
+  .description('运行项目')
   .action((name) => {
     // 判断文档仓库是否存在
-    fs.stat(path.resolve(__dirname, '../docs/.git'), (err) => {
+    fs.stat(path.resolve(__dirname, `../${blogName}`), (err) => {
       if (err) {
         console.log(chalk.red('请先初始化项目'));
       } else {
         switch (name) {
-          case 'start':
           case 'dev':
-            shell.exec('npm run dev');
+            require('./commands/dev.js')();
             break;
           case 'build':
-            shell.exec('npm run build');
+            require('./commands/build.js')();
             break;
-          case 'publish':
-            shell.exec('npm run publish');
+          case 'analyze':
+            require('./commands/build.js')({ analyze: true });
             break;
           default:
             console.log(chalk.red('运行命令不存在'));

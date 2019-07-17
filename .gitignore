@@ -1,3 +1,3 @@
-node_modules/
 .vscode/
-./blogs
+node_modules/
+blogs/

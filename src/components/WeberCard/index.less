@@ -1,0 +1,59 @@
+:local {
+  .weberCard {
+    :global {
+      .ant-card-body {
+        padding: 0;
+      }
+      .demo {
+        padding: 42px 20px 50px;
+        border-bottom: 1px solid #e9e9e9;
+      }
+      .title {
+        position: relative;
+        padding: 17px 16px 15px 20px;
+        span {
+          position: absolute;
+          top: -10px;
+          left: 14px;
+          padding: 0 6px;
+          background: #fff;
+        }
+        .drop-btn {
+          position: absolute;
+          right: 16px;
+          bottom: 17px;
+          width: 18px;
+          height: 18px;
+          font-size: 18px;
+          line-height: 18px;
+          text-align: center;
+          color: #999;
+          opacity: 0.5;
+          -moz-user-select: none;
+          background: #fff;
+          -webkit-user-select: none;
+          -webkit-transition: all 0.3s;
+          transition: all 0.3s;
+          -ms-user-select: none;
+          user-select: none;
+          cursor: pointer;
+          border-radius: 100%;
+          &.active {
+            color: #0d72ba;
+          }
+        }
+      }
+      .code {
+        padding: 10px 15px;
+        font-size: 13px;
+        border-top: 1px dashed #e9e9e9;
+        &.show {
+          display: block;
+        }
+        &.hide {
+          display: none;
+        }
+      }
+    }
+  }
+}
