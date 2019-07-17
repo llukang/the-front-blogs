@@ -7,7 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
-const outputPath = path.resolve('site');
+const outputPath = path.resolve('docs');
 
 const webpackConfig = merge(baseConfig, {
   output: {
