@@ -74,6 +74,7 @@ const webpackConfig = {
       [
         { from: 'blogs/**/*.md' },
         { from: 'blogs/**/*.+(png|jpg|jpg)', to: 'images/[name].[ext]' },
+        { from: 'CNAME' },
       ],
       {}
     ),
