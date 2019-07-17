@@ -13,9 +13,7 @@ export const isUrl = (path) => {
 
 // 请求
 export const request = (mdPath) => {
-  const href = window.location.href || '';
-  const url = href.split('#')[0] || '';
-  return fetch(`${url}/${mdPath}`)
+  return fetch(`${window.location.origin}${mdPath}`)
     .then(res => res.text());
 };
 
