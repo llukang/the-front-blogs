@@ -175,7 +175,7 @@
   我提交了一笔 commit1 到本地分支，仔细一看发现是手贱提交错了，怎么办?
 
   ```bash
-  $ git log 
+  $ git log
   $ git reset [--soft] [--hard] commitId
   ```
 
@@ -198,14 +198,14 @@
 
 - 只介绍一种比较推荐的方式 merge 代码（建议本地分支 merge 本地分支），可以适用于 Gerrite。
 
-    ```bash
-      $ git checkout branch1
-      $ git pull --rebase
-      $ git checkout branch2
-      $ git pull --rebase
-      $ git merge branch1
-      $ git push origin branch2
-    ```
+  ```bash
+    $ git checkout branch1
+    $ git pull --rebase
+    $ git checkout branch2
+    $ git pull --rebase
+    $ git merge branch1
+    $ git push origin branch2
+  ```
 
   > 两个分支都更新最新的代码，然后把 branch1 合并到 branch2（Gerrite 上建议使用--no-ff 合并），最后把代码推到远程分支
 
@@ -215,7 +215,7 @@
   stash 的冲突（最易解决的冲突），冲突发生在 stash pop 出来时（备份的代码和当前分支代码的冲突） 修改所有冲突后，git add 所有 both modify 的文件，然后在用上面的 reset HAED . 返回到未 add 的状态
 
   ```bash
-    $ git add . 
+    $ git add .
     $ git reset HAED .
   ```
 
@@ -246,8 +246,8 @@
   本地已经有了更改，当我准备提交时发现代码在 master 分支上，不在我想要的那个分支?
 
   ```bash
-    $ git stash 
-    $ git checkout my_wanted_branch 
+    $ git stash
+    $ git checkout my_wanted_branch
     $ git stash pop
   ```
 
@@ -259,21 +259,21 @@
   本地提交代码到了 master，不是我想要提交到的那个远程分支，即代码提交错了分支?
 
   ```bash
-    $ git reset --soft commitId #（上一笔提交commitId） 
+    $ git reset --soft commitId #（上一笔提交commitId）
     $ git reset HEAD .
-    $ git stash 
-    $ git checkout my_wanted_branch 
-    $ git stash pop 
-    $ git add . 
-    $ git commit 
+    $ git stash
+    $ git checkout my_wanted_branch
+    $ git stash pop
+    $ git add .
+    $ git commit
     $ git push origin my_wanted_branch·
   ```
 
   ```bash
-    $ git checkout my_wanted_branch 
-    $ git cherry-pick commitId #（那笔提交错了分支的commitId） 
-    $ git push origin my_wanted_branch 
-    $ git checkout master 
+    $ git checkout my_wanted_branch
+    $ git cherry-pick commitId #（那笔提交错了分支的commitId）
+    $ git push origin my_wanted_branch
+    $ git checkout master
     $ git reset --hard commitId #（上一笔提交commitId）
   ```
 
@@ -286,7 +286,7 @@
   本地已经提交了 commit1 到 branch1，然后发现我少提交了一个文件，或者 commit msg 写得不好？
 
   ```bash
-    $ git add newfile 
+    $ git add newfile
     $ git commit --amend
   ```
 
