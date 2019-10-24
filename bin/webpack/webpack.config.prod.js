@@ -7,12 +7,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const baseConfig = require('./webpack.config.base');
 
-const outputPath = path.resolve('docs');
+const outputPath = path.resolve('dist');
 
 const webpackConfig = merge(baseConfig, {
   output: {
     path: outputPath,
-    filename: '[name].[hash:8].js',
+    filename: '[name].[hash:8].js'
   },
   mode: 'production',
   devtool: 'inline-source-map',
@@ -21,11 +21,7 @@ const webpackConfig = merge(baseConfig, {
     rules: [
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-        ]
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
       },
       {
         test: /\.less$/,
@@ -34,13 +30,13 @@ const webpackConfig = merge(baseConfig, {
           'css-loader',
           'postcss-loader',
           'less-loader'
-        ],
-      },
+        ]
+      }
     ]
   },
   plugins: [
     new CleanWebpackPlugin([outputPath], {
-      root: process.cwd(),
+      root: process.cwd()
     }),
     new UglifyJsPlugin({
       test: /\.js($|\?)/i
@@ -54,10 +50,9 @@ const webpackConfig = merge(baseConfig, {
       canPrint: true
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash:8].css',
-    }),
+      filename: '[name].[hash:8].css'
+    })
   ]
 });
-
 
 module.exports = webpackConfig;

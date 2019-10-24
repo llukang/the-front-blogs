@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const webpackConfig = {
   context: process.cwd(),
   entry: {
-    index: './src/index.js',
+    index: './src/index.js'
   },
   optimization: {
     // 包清单
@@ -22,7 +22,7 @@ const webpackConfig = {
           chunks: 'initial',
           name: 'vendor',
           priority: 10,
-          enforce: true,
+          enforce: true
         }
       }
     }
@@ -74,7 +74,7 @@ const webpackConfig = {
       [
         { from: 'blogs/**/*.md' },
         { from: 'blogs/**/*.+(png|jpg|jpg)', to: 'images/[name].[ext]' },
-        { from: 'CNAME' },
+        { from: './src/assets/**/*.+(png|jpg|jpg)', to: 'images/[name].[ext]' }
       ],
       {}
     ),
@@ -83,7 +83,7 @@ const webpackConfig = {
     }),
     new HtmlWebpackPlugin({
       template: 'index.html'
-    }),
+    })
   ]
 };
 
