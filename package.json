@@ -18,6 +18,7 @@
     "init": "cicada init",
     "start": "cicada run dev",
     "build": "cicada run build",
+    "update": "cicada init && cicada run build",
     "analyze": "cicada run analyze",
     "precommit": "eslint ./src"
   },

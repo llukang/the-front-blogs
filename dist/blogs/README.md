@@ -8,17 +8,32 @@
 ## 待办事宜
 
 - 了解 `Fiber`
+- 整理 `react` 动画
 - 熟悉 `typescript`
 - 算法 `letcodes`
+- 阅读 `umi` 源码
 - 阅读 `immer` 源码
-- 整理 [jest 单元测试](http://www.aliued.com/?p=4095)
+- 阅读 `lodash` 源码
+- 阅读 `moment` 源码
+- 阅读 `react` 源码
+- 整理 `jest` 单元测试
+- 打包 `react` 体积优化
+- 整理 `h5` 通用模板
+- 可视化集成工具 重点
+
 - 深入学习 `nodejs`
-- - 完善 `react-so-cool` 项目
-- 完善 `the-front-react`
+- 完善 `the-react-compoent`
+- 完善 `react-so-cool` 项目
+
+- 设计模式
+- 整理 `vs-code` 使用文档
 - 整理 `create-react-app` 源码
 - 梳理 微信公众号
 - 梳理 eletron 技术栈
 - 梳理 vue 技术栈
+
+- `rematch`
+- `mobx`
 
 ## 短期目标
 

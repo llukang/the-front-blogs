@@ -45,6 +45,22 @@ pm2 flush
 
 ```
 
+### 保存自动重启
+
+```bash
+# 服务器重启，自动启动项目
+pm2 save
+```
+
+### 启用 npm 命令
+
+```bash
+#启动一个进程并把它命名为 test
+pm2 start npm --name test -- start
+
+pm2 start npm --name "{app_name}" --run "{script_name}"
+```
+
 ### 服务器启动 pm2
 
 服务器重启时，可以保存所有进程列表并在重新启动时恢复所有进程。
@@ -70,6 +86,9 @@ pm2 monit
 # 运行npm 命令
 # pm2 运行 npm run dev
  pm2 start npm  --run test --name "myAPP"
+
+# 查看所有端口
+netstat -ntlp
 
 ```
 
