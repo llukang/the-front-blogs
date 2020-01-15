@@ -15,10 +15,9 @@
     "cicada": "./bin/main.js"
   },
   "scripts": {
-    "init": "cicada init",
-    "start": "cicada run dev",
-    "build": "cicada run build",
-    "analyze": "cicada run analyze",
+    "start": "cicada init && cicada run dev",
+    "build": "cicada init && cicada run build",
+    "analyze": "cicada init && cicada run analyze",
     "precommit": "eslint ./src"
   },
   "dependencies": {

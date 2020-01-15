@@ -48,7 +48,8 @@ const fetchBlog = repository => {
     const blogExists = fs.existsSync(blogFolderPath);
 
     if (!blogExists) {
-      const cloneResult = shell.exec(`git clone ${repository}  ${blogName}`);
+      const command =`git clone ${repository}  ${blogName}`
+      const cloneResult = shell.exec(command);
       if (cloneResult.code) {
         throw new Error("初始化blog失败！");
       }
