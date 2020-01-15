@@ -6,7 +6,7 @@ import hljs from 'highlight.js/lib/highlight';
 import javascript from 'highlight.js/lib/languages/javascript';
 import bash from 'highlight.js/lib/languages/bash';
 import json from 'highlight.js/lib/languages/json';
-import html from 'highlight.js/lib/languages/XML';
+import html from 'highlight.js/lib/languages/xml';
 import css from 'highlight.js/lib/languages/css';
 import scss from 'highlight.js/lib/languages/scss';
 import less from 'highlight.js/lib/languages/less';
@@ -19,7 +19,6 @@ hljs.registerLanguage('html', html);
 hljs.registerLanguage('css', css);
 hljs.registerLanguage('scss', scss);
 hljs.registerLanguage('less', less);
-
 
 const transFormMarkDown = (markdownText) => {
   const converter = new showdown.Converter();
