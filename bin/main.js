@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const program = require('commander');
-const shell = require('shelljs');
-const chalk = require('chalk');
-const fs = require('fs-extra');
-const packageJSON = require('../package.json');
+const path = require("path");
+const program = require("commander");
+const shell = require("shelljs");
+const chalk = require("chalk");
+const fs = require("fs-extra");
+const packageJSON = require("../package.json");
 
-const filesMap = require('./utils/filesMap');
+const filesMap = require("./utils/filesMap");
 
-const blogName = 'blogs';
+const blogName = "blogs";
 
 // 写入文件
-const updatePackageJson = (data) => {
+const updatePackageJson = data => {
   const dataStr = JSON.stringify(data, null, 2);
-  const fileName = './package.json';
+  const fileName = "./package.json";
   try {
     fs.unlinkSync(fileName);
   } catch (err) {
@@ -22,7 +22,7 @@ const updatePackageJson = (data) => {
   }
   console.log(dataStr);
 
-  fs.writeFile(fileName, `${dataStr}`, (err) => {
+  fs.writeFile(fileName, `${dataStr}`, err => {
     if (err) {
       console.log(`————————————更新${fileName}失败————————————`);
       console.log(err);
@@ -31,7 +31,7 @@ const updatePackageJson = (data) => {
 };
 
 // init blog
-const fetchBlog = (repository) => {
+const fetchBlog = repository => {
   try {
     // save blog's git repository
     if (repository) {
@@ -50,14 +50,15 @@ const fetchBlog = (repository) => {
     if (!blogExists) {
       const cloneResult = shell.exec(`git clone ${repository}  ${blogName}`);
       if (cloneResult.code) {
-        throw new Error('初始化blog失败！');
+        throw new Error("初始化blog失败！");
       }
     } else {
       const pullResult = shell.exec(
         `cd ${blogName} && git checkout ./ && git pull`
       );
       if (pullResult.code) {
-        throw new Error('同步blog失败！');
+        console.log(pullResult);
+        throw new Error("同步blog失败！");
       }
     }
 
@@ -69,23 +70,23 @@ const fetchBlog = (repository) => {
 };
 
 program
-  .version('0.1.0', '-v,--version')
-  .usage('[options] <file ...>')
-  .option('-i, --integer <n>', 'An integer argument', parseInt)
-  .option('-f, --float <n>', 'A float argument', parseFloat)
+  .version("0.1.0", "-v,--version")
+  .usage("[options] <file ...>")
+  .option("-i, --integer <n>", "An integer argument", parseInt)
+  .option("-f, --float <n>", "A float argument", parseFloat)
   .parse(process.argv);
 
 // 初始化文档
 program
-  .command('init [repository]')
+  .command("init [repository]")
   .description(`初始化${blogName}文档`)
-  .action((repository) => {
+  .action(repository => {
     fetchBlog(repository);
   });
 
 // 更新文档
 program
-  .command('update')
+  .command("update")
   .description(`更新${blogName}文档`)
   .action(() => {
     fetchBlog();
@@ -93,26 +94,26 @@ program
 
 // 运行项目文档
 program
-  .command('run <name>')
-  .description('运行项目')
-  .action((name) => {
+  .command("run <name>")
+  .description("运行项目")
+  .action(name => {
     // 判断文档仓库是否存在
-    fs.stat(path.resolve(__dirname, `../${blogName}`), (err) => {
+    fs.stat(path.resolve(__dirname, `../${blogName}`), err => {
       if (err) {
-        console.log(chalk.red('请先初始化项目'));
+        console.log(chalk.red("请先初始化项目"));
       } else {
         switch (name) {
-          case 'dev':
-            require('./commands/dev.js')();
+          case "dev":
+            require("./commands/dev.js")();
             break;
-          case 'build':
-            require('./commands/build.js')();
+          case "build":
+            require("./commands/build.js")();
             break;
-          case 'analyze':
-            require('./commands/build.js')({ analyze: true });
+          case "analyze":
+            require("./commands/build.js")({ analyze: true });
             break;
           default:
-            console.log(chalk.red('运行命令不存在'));
+            console.log(chalk.red("运行命令不存在"));
             break;
         }
       }
