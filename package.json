@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git@github.com:llukang/the-front-blogs.git"
   },
-  "blogs": "https://github.com/llukang/the-front-blogs.git",
+  "blogs": "git@github.com:llukang/the-front-notes.git",
   "keywords": [
     "blog"
   ],
@@ -16,9 +16,10 @@
     "cicada": "./bin/main.js"
   },
   "scripts": {
-    "start": "cicada init && cicada run dev",
-    "build": "cicada init && cicada run build",
-    "analyze": "cicada init && cicada run analyze",
+    "init": "cicada run init",
+    "start": "cicada run dev",
+    "build": "cicada run build",
+    "analyze": "cicada run analyze",
     "precommit": "eslint ./src"
   },
   "dependencies": {
