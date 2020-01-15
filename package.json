@@ -17,7 +17,7 @@
   "scripts": {
     "init": "cicada init",
     "start": "cicada run dev",
-    "build": "cicada init && cicada run build",
+    "build": "cicada run build",
     "analyze": "cicada run analyze",
     "precommit": "eslint ./src"
   },
